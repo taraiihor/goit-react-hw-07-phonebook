@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // import { connect} from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../redux/contact/contact-action';
+import actions from '../redux/contact/contact-action';
 import './ContactsList.css';
 import { getVisibleContact } from '../redux/contact/contact-selector';
 
@@ -9,7 +9,7 @@ function ContactsList() {
   const contacts = useSelector(getVisibleContact);
   const dispatch = useDispatch();
 
-  const onDeleteContact = id => dispatch(deleteContact(id));
+  const onDeleteContact = id => dispatch(actions.deleteContact(id));
 
   return (
     <>
