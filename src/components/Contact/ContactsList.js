@@ -15,9 +15,10 @@ function ContactsList() {
   const dispatch = useDispatch();
 
   const onDeleteContact = id => dispatch(deleteContact(id));
+
   useEffect(() => {
     dispatch(fetchContact());
-  }, [dispatch]);
+  }, [dispatch]); // dispatch як залежність.
   return (
     <>
       {!contacts.length && <div>Немає жодного контакту</div>}
