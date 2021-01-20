@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContact } from '../redux/contact/contact-selector';
 // import * as actions from '../redux/contact/contact-action';
-import operations from '../redux/contact/contact-operations';
+import { addContact } from '../redux/contact/contact-operations';
 import './ContactForm.css';
 
 function ContactForm() {
@@ -35,7 +35,7 @@ function ContactForm() {
       reset();
       return;
     }
-    dispatch(operations.addContact(name, number));
+    dispatch(addContact(name, number));
     // onSubmit(name, number);
     reset();
   };

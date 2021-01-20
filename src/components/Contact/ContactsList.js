@@ -1,16 +1,23 @@
 import PropTypes from 'prop-types';
 // import { connect} from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
-import actions from '../redux/contact/contact-action';
+// import actions from '../redux/contact/contact-action';
+import {
+  fetchContact,
+  deleteContact,
+} from '../redux/contact/contact-operations';
 import './ContactsList.css';
 import { getVisibleContact } from '../redux/contact/contact-selector';
+import { useEffect } from 'react';
 
 function ContactsList() {
   const contacts = useSelector(getVisibleContact);
   const dispatch = useDispatch();
 
-  const onDeleteContact = id => dispatch(actions.deleteContact(id));
-
+  const onDeleteContact = id => dispatch(deleteContact(id));
+  useEffect(() => {
+    dispatch(fetchContact());
+  }, [dispatch]);
   return (
     <>
       {!contacts.length && <div>Немає жодного контакту</div>}

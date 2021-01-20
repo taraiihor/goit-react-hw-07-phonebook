@@ -1,10 +1,20 @@
 // import { ADD, DELETE, CHANGE_FILTER } from './contact-types';
-import { v4 as uniqueId } from 'uuid';
+// import { v4 as uniqueId } from 'uuid';
 import { createAction } from '@reduxjs/toolkit';
+const fetchContactRequest = createAction('contact/fetchContactRequest');
+const fetchContactSuccess = createAction('contact/fetchContactSuccess');
+const fetchContactError = createAction('contact/fetchContactError');
 
 const addContactRequest = createAction('contact/addContactRequest');
 const addContactSuccess = createAction('contact/addContactSuccess');
 const addContactError = createAction('contact/addContactError');
+
+const deleteContactRequest = createAction('contacn/deleteContactRequest');
+const deleteContactSuccess = createAction('contact/deleteContactSuccess');
+const deleteContactError = createAction('contact/deleteContactError');
+
+const changeFilter = createAction('contact/changeFilter');
+
 // export const addContact = createAction(
 //   'contact/addContact',
 //   function prepare(name, number) {
@@ -17,9 +27,8 @@ const addContactError = createAction('contact/addContactError');
 //     };
 //   },
 // );
-const deleteContact = createAction('contact/deleteContact');
-const changeFilter = createAction('contact/changeFilter');
 
+// const deleteContact = createAction('contact/deleteContact');
 // export const addContact = (name, number) => ({
 //   type: ADD,
 //   payload: {
@@ -37,10 +46,17 @@ const changeFilter = createAction('contact/changeFilter');
 //   type: CHANGE_FILTER,
 //   payload: value,
 // });
-export default {
+const actions = {
   addContactRequest,
   addContactSuccess,
   addContactError,
-  deleteContact,
+  // deleteContact,
   changeFilter,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+  fetchContactRequest,
+  fetchContactSuccess,
+  fetchContactError,
 };
+export default actions;
