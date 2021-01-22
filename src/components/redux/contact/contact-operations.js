@@ -2,12 +2,23 @@ import axios from 'axios';
 import actions from './contact-action';
 
 axios.defaults.baseURL = 'http://localhost:4040';
-export const fetchContact = () => dispatch => {
+// export const fetchContact = () => dispatch => {
+//   dispatch(actions.fetchContactRequest());
+//   axios
+//     .get('/contact')
+//     .then(({ data }) => dispatch(actions.fetchContactSuccess(data)))
+//     .catch(error => dispatch(error));
+// };
+
+// асинхронний код
+export const fetchContact = () => async dispatch => {
   dispatch(actions.fetchContactRequest());
-  axios
-    .get('/contact')
-    .then(({ data }) => dispatch(actions.fetchContactSuccess(data)))
-    .catch(error => dispatch(error));
+  try {
+    const { data } = await axios.get(`/contact`);
+    dispatch(actions.fetchContactSuccess(data));
+  } catch (error) {
+    dispatch(actions.fetchContactError(error));
+  }
 };
 export const addContact = (name, number) => dispatch => {
   const contact = { name, number };
