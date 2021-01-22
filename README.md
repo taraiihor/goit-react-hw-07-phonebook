@@ -1,8 +1,10 @@
 #install\
+npm install axios\
 npm install redux-persist\
 npm install @reduxjs/toolkit\
 npm install --save-dev prettier husky lint-staged\
 npm i --save redux-logger\
+
 для запуску json-server /// npm run json-api
 
 # Getting Started with Create React App
