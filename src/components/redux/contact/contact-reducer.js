@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 // import { addContact, deleteContact, changeFilter } from './contact-action';
 import actions from './contact-action';
+import { fetchContact, addContact, deleteContact } from './contact-operations';
 
 import { createReducer } from '@reduxjs/toolkit';
 // const contacTest = [
@@ -10,50 +11,50 @@ import { createReducer } from '@reduxjs/toolkit';
 //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 // ];
 const contact = createReducer([], {
-  [actions.fetchContactSuccess]: (_, { payload }) => payload,
-  [actions.addContactSuccess]: (state, { payload }) => [...state, payload],
-  [actions.deleteContactSuccess]: (state, { payload }) =>
+  // для асинхронного коду, create the thunk
+  [fetchContact.fulfilled]: (_, { payload }) => payload,
+  [addContact.fulfilled]: (state, { payload }) => [...state, payload],
+  [deleteContact.fulfilled]: (state, { payload }) =>
     state.filter(contact => contact.id !== payload),
+
+  // [actions.fetchContactSuccess]: (_, { payload }) => payload,
+  // [actions.addContactSuccess]: (state, { payload }) => [...state, payload],
+  // [actions.deleteContactSuccess]: (state, { payload }) =>
+  //   state.filter(contact => contact.id !== payload),
 });
 const filter = createReducer('', {
   [actions.changeFilter]: (_, { payload }) => payload,
 });
 const error = createReducer(null, {
-  [actions.fetchContactError]: (_, { payload }) => payload,
-  [actions.fetchContactRequest]: () => null,
+  // [actions.fetchContactError]: (_, { payload }) => payload,
+  // [actions.fetchContactRequest]: () => null,
+  [fetchContact.rejected]: (_, { payload }) => payload,
+  [fetchContact.pending]: () => null,
 });
-// const contact = (state = contacTest, { type, payload }) => {
-//   switch (type) {
-//     case ADD:
-//       return [...state, payload];
-//     case DELETE:
-//       return state.filter(contact => contact.id !== payload);
-//     default:
-//       return state;
-//   }
-// };
-// const filter = (state = '', { type, payload }) => {
-//   switch (type) {
-//     case CHANGE_FILTER:
-//       return payload;
-//     default:
-//       return state;
-//   }
-// };
-const loading = createReducer(false, {
-  [actions.addContactRequest]: () => false,
-  [actions.addContactSuccess]: () => true,
-  [actions.addContactError]: () => false,
-  [actions.deleteContactRequest]: () => false,
-  [actions.deleteContactSuccess]: () => true,
-  [actions.deleteContactError]: () => false,
-  [actions.fetchContactRequest]: () => false,
-  [actions.fetchContactSuccess]: () => true,
-  [actions.fetchContactError]: () => false,
+
+const isLoading = createReducer(false, {
+  // [actions.addContactRequest]: () => false,
+  // [actions.addContactSuccess]: () => true,
+  // [actions.addContactError]: () => false,
+  // [actions.deleteContactRequest]: () => false,
+  // [actions.deleteContactSuccess]: () => true,
+  // [actions.deleteContactError]: () => false,
+  // [actions.fetchContactRequest]: () => false,
+  // [actions.fetchContactSuccess]: () => true,
+  // [actions.fetchContactError]: () => false,
+  [fetchContact.pending]: () => true,
+  [fetchContact.fulfilled]: () => false,
+  [fetchContact.rejected]: () => false,
+  [addContact.pending]: () => true,
+  [addContact.fulfilled]: () => false,
+  [addContact.rejected]: () => false,
+  [deleteContact.pending]: () => true,
+  [deleteContact.fulfilled]: () => false,
+  [deleteContact.rejected]: () => false,
 });
 export default combineReducers({
   contact,
-  loading,
+  isLoading,
   filter,
   error,
 });
