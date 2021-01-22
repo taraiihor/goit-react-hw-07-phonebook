@@ -1,4 +1,3 @@
-// import { ADD, DELETE, CHANGE_FILTER } from './contact-types';
 // import { v4 as uniqueId } from 'uuid';
 import { createAction } from '@reduxjs/toolkit';
 const fetchContactRequest = createAction('contact/fetchContactRequest');

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-// import { ADD, DELETE, CHANGE_FILTER } from './contact-types';
 // import { addContact, deleteContact, changeFilter } from './contact-action';
 import actions from './contact-action';
 
