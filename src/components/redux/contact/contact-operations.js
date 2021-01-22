@@ -20,13 +20,24 @@ export const fetchContact = () => async dispatch => {
     dispatch(actions.fetchContactError(error));
   }
 };
-export const addContact = (name, number) => dispatch => {
+// export const addContact = (name, number) => dispatch => {
+//   const contact = { name, number };
+//   dispatch(actions.addContactRequest());
+//   axios
+//     .post('/contact', contact)
+//     .then(({ data }) => dispatch(actions.addContactSuccess(data)))
+//     .catch(error => dispatch(error));
+// };
+//асинхронний код
+export const addContact = (name, number) => async dispatch => {
   const contact = { name, number };
   dispatch(actions.addContactRequest());
-  axios
-    .post('/contact', contact)
-    .then(({ data }) => dispatch(actions.addContactSuccess(data)))
-    .catch(error => dispatch(error));
+  try {
+    const { data } = await axios.post(`/contact`, contact);
+    dispatch(actions.addContactSuccess(data));
+  } catch (error) {
+    dispatch(actions.addContactError(error));
+  }
 };
 
 export const deleteContact = contactId => dispatch => {

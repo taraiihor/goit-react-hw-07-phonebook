@@ -19,6 +19,10 @@ const contact = createReducer([], {
 const filter = createReducer('', {
   [actions.changeFilter]: (_, { payload }) => payload,
 });
+const error = createReducer(null, {
+  [actions.fetchContactError]: (_, { payload }) => payload,
+  [actions.fetchContactRequest]: () => null,
+});
 // const contact = (state = contacTest, { type, payload }) => {
 //   switch (type) {
 //     case ADD:
@@ -52,4 +56,5 @@ export default combineReducers({
   contact,
   loading,
   filter,
+  error,
 });
