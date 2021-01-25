@@ -18,7 +18,8 @@ function ContactsList() {
 
   useEffect(() => {
     dispatch(fetchContact());
-  }, [dispatch]); // dispatch як залежність.
+    // eslint-disable-next-line
+  }, []); // dispatch як залежність.
   return (
     <>
       {!contacts.length && <div>Немає жодного контакту</div>}
