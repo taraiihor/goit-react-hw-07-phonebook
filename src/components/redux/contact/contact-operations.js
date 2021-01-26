@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import actions from './contact-action'; // ванідбного коду
+// import actions from './contact-action'; // валідбного коду
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'http://localhost:4040';
